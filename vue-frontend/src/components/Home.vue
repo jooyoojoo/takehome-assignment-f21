@@ -1,7 +1,13 @@
 <template>
   <div>
     <!-- PART 1: Pass in a "complete" prop here -->
-    <Instructions />
+    <Instructions :complete="true" />
+    <!-- PART 6: Add a new show -->
+    <div>
+      <p class="title">Add a new show...</p>
+      <input v-model="showName" placeholder="Enter a show name" />
+      <button type="button" v-on:click="addShow()">Submit</button>
+    </div>
     <!-- PART 4: Modify the Show component to accept all of these props -->
     <Show
       v-for="show in shows"
@@ -30,6 +36,16 @@ export default {
         { id: 3, name: "Black Mirror", episodes_seen: 3 }
       ]
     };
+  },
+  methods: {
+    addShow: function() {
+      let show = {
+        id: this.shows.length + 1,
+        name: this.showName,
+        episodes_seen: 0
+      };
+      this.shows.push(show);
+    }
   }
 };
 </script>
